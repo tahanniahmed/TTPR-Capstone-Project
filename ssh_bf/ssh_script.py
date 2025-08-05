@@ -33,7 +33,10 @@ def ssh_brute_force():
             print(f"[!] Conncetion error: {str(e)}")
             time.sleep(2)
         finally:
-            ssh.close()
+            try: 
+                ssh.close()
+            except:
+                pass
     print("[*] Finished. No valid password found.")
 
 if __name__ == "__main__":
