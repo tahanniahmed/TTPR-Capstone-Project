@@ -1,4 +1,4 @@
-from app import ssh_brute_force
+from app import ssh_brute_force, findmy_password
 import json
 
 def perfrom_attack():
@@ -6,9 +6,15 @@ def perfrom_attack():
     print("WARNING: This script is intended for educational purposes only. Unauthorized access to computer systems is illegal and unethical.")
     print("Only run this script on testing environments where you have explicit permission to perform security testing.")
     print()
-    print("Initializing Attack...")
+    
+    # invoking the findmy_password function to retrieve the password
+    findmy_password()
+    print("password retrieval complete.\n")
+    print("proceeding with SSH brute-force attack...\n")
+    print()
+    print("initializing attack...")
 
-    # Getting and verifying target IP
+    # getting and verifying target IP
     targetIP = "target_ip.json"
     with open(targetIP, "r") as ipAddress_key:
         target_ip = json.load(ipAddress_key)
@@ -20,7 +26,7 @@ def perfrom_attack():
         print(target_address)
         print("ip address file has been updated")
 
-    # Getting and verifying username
+    # getting and verifying username
     targetUser = "username.json"
     with open(targetUser, "r") as username_key:
         target_user = json.load(username_key)
