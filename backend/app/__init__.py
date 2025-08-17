@@ -24,7 +24,7 @@ def perform_attack():
     with open(targetIP, "r") as ipAddress_key:
         target_ip = json.load(ipAddress_key)
 
-    verify_ip = "app/target_ip"
+    verify_ip = "target_ip"
     if verify_ip in target_ip and target_ip[verify_ip] == "":
         target_address = input("No target IP found. Please enter the target IP address: ")
         target_ip[verify_ip] = target_address
