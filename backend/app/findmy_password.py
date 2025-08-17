@@ -14,10 +14,9 @@ def finder():
     actual_password = input("PASSWORD: ")
     with open(passKey, 'w') as pass_key:
         # encode (obfuscate)
-        encoded_pass = base64.b64encode(actual_password.encode()).decode()
-        pass_data = pass_key.write(json.dumps({"pass_key": encoded_pass}))
+        actual_password = base64.b64encode(actual_password.encode()).decode()
+        pass_data = pass_key.write(json.dumps({"pass_key": actual_password}))
         #pass_file['pass_key'] = encoded_pass
-        print(pass_data)
         
     # web scraping the password list from KoreLogic's SecLists repository
     # this is a list of common passwords that can be used for testing purposes.
