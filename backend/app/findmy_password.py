@@ -9,7 +9,7 @@ def finder():
     
     # file directory
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
-    passKey = os.path.join(base_dir, "target_ip.json")
+    passKey = os.path.join(base_dir, "password_key.json")
     
     actual_password = input("PASSWORD: ")
     with open(passKey, 'r') as pass_key:
@@ -34,9 +34,12 @@ def finder():
             password_file.write(password + '\n')
             
     with open('password_key.json', 'r') as pass_key:
-        # decode (restore)
-        decoded = base64.b64decode(actual_password.encode()).decode()
+        pass_file = json.load(pass_key)
+    
+    decoded = pass_file['pass_key']
+    # decode (restore)
+    decoded_pass = base64.b64decode(decoded.encode()).decode()
 
     # adding the actual password to the passwords.txt file
     with open('passwords.txt', 'a') as password_file:
-        password_file.write(decoded + '\n')
+        password_file.write(decoded_pass + '\n')
