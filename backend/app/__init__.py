@@ -27,7 +27,7 @@ def perform_attack():
     verify_ip = "target_ip"
     if verify_ip in target_ip and target_ip[verify_ip] == "":
         target_address = input("No target IP found. Please enter the target IP address:  \n")
-        target_ip[verify_ip] = target_address
+        target_ip[verify_ip] = target_address.strip()
         print(target_address)
         print("ip address file has been updated")
         
@@ -42,7 +42,7 @@ def perform_attack():
     verify_user = "username"
     if verify_user in target_user and target_user[verify_user] == "":
         target_userName = input("No username found. Please enter target username: \n")
-        target_user[verify_user] = target_userName
+        target_user[verify_user] = target_userName.strip()
         print(target_userName)
         print("username file has been updated")
     
