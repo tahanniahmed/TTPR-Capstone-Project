@@ -1,7 +1,8 @@
-from app import ssh_brute_force, findmy_password
+from app import ssh_brute_force
+from app import findmy_password
 import json
 
-def perfrom_attack():
+def perform_attack():
     
     print("WARNING: This script is intended for educational purposes only. Unauthorized access to computer systems is illegal and unethical.")
     print("Only run this script on testing environments where you have explicit permission to perform security testing.")
