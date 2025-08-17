@@ -30,9 +30,12 @@ def perform_attack():
         target_ip[verify_ip] = target_address
         print(target_address)
         print("ip address file has been updated")
-
+        
+    # file directory
+    base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
+    targetUser = os.path.join(base_dir, "username.json")
+    
     # getting and verifying username
-    targetUser = "username.json"
     with open(targetUser, "r") as username_key:
         target_user = json.load(username_key)
 
@@ -52,7 +55,7 @@ def perform_attack():
     with open(targetUser, "w") as username_key:
         json.dump(target_user, username_key, indent=4)
         print(target_user["username"])
-
+    
     TARGETIP = target_ip["target_ip"]
     TARGETUSER = target_user["username"]
     password_document = "passwords.txt"
