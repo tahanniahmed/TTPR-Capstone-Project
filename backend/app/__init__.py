@@ -1,9 +1,10 @@
 import app.findmy_password as findmy_password
 import app.ssh_script as ssh_script
 import json
+import os
 
 def perform_attack():
-    
+    # Disclaimer
     print("WARNING: This script is intended for educational purposes only. Unauthorized access to computer systems is illegal and unethical.")
     print("Only run this script on testing environments where you have explicit permission to perform security testing.")
     print()
@@ -14,13 +15,16 @@ def perform_attack():
     print("proceeding with SSH brute-force attack...\n")
     print()
     print("initializing attack...")
-
+    
+    # file directory
+    base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
+    targetIP = os.path.join(base_dir, "target_ip.json")
+    
     # getting and verifying target IP
-    targetIP = "target_ip.json"
     with open(targetIP, "r") as ipAddress_key:
         target_ip = json.load(ipAddress_key)
 
-    verify_ip = "target_ip"
+    verify_ip = "app/target_ip"
     if verify_ip in target_ip and target_ip[verify_ip] == "":
         target_address = input("No target IP found. Please enter the target IP address: ")
         target_ip[verify_ip] = target_address
