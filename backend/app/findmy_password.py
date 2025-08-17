@@ -12,12 +12,15 @@ def finder():
     passKey = os.path.join(base_dir, "target_ip.json")
     
     actual_password = input("PASSWORD: ")
-    with open(passKey, 'w') as pass_key:
-        # encode (obfuscate)
-        encoded_pass = base64.b64encode(actual_password.encode()).decode()
-        pass_data = json.load(pass_key)
-        pass_data["pass_key"] = encoded_pass
-        print("Encoded:", encoded_pass)
+    with open(passKey, 'r') as pass_key:
+        pass_file = json.load(pass_key)
+
+    # encode (obfuscate)
+    encoded_pass = base64.b64encode(actual_password.encode()).decode()
+    pass_file['pass_key'] = encoded_pass
+
+    with open(passKey, "w") as pass_key:
+        json.dump(pass_file, pass_key, indent=4)  
         
     # web scraping the password list from KoreLogic's SecLists repository
     # this is a list of common passwords that can be used for testing purposes.
