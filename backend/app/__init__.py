@@ -27,8 +27,7 @@ def perform_attack():
     verify_ip = "target_ip"
     if verify_ip in target_ip and target_ip[verify_ip] == "":
         target_address = input("No target IP found. Please enter the target IP address:  \n")
-        target_ip[verify_ip] = target_address.strip()
-        print(target_address)
+        target_ip[verify_ip] = str(target_address).strip()
         print("ip address file has been updated")
         
     # file directory
@@ -43,7 +42,6 @@ def perform_attack():
     if verify_user in target_user and target_user[verify_user] == "":
         target_userName = input("No username found. Please enter target username: \n")
         target_user[verify_user] = target_userName.strip()
-        print(target_userName)
         print("username file has been updated")
     
     # updating file
@@ -60,8 +58,8 @@ def perform_attack():
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
     password_File = os.path.join(base_dir, 'passwords.txt')
     
-    TARGETIP = target_ip["target_ip"]
-    TARGETUSER = target_user["username"]
+    TARGETIP = str(target_ip[verify_ip]).strip()
+    TARGETUSER = str(target_user[verify_user]).strip()
     password_document = password_File
     
     ssh_script.ssh_brute_force(TARGETIP, TARGETUSER, password_document)
