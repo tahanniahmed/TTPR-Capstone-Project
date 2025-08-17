@@ -11,6 +11,8 @@ def ssh_brute_force(target_ip, username, password_file):
     password_File = os.path.join(base_dir, password_file)
     
     print(f"[*] Starting SSH brute-force on {target_ip}...")
+    print()
+    
     try:
         with open (password_File, "r") as file:
             passwords = file.read().splitlines()

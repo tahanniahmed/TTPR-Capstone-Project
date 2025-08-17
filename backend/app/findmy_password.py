@@ -30,10 +30,12 @@ def finder():
     passwords = data.text.splitlines()
     passwords_list = os.path.join(base_dir, "passwords.txt")
 
+    # writing the passwords to a file
     for password in passwords:
         with open(passwords_list, 'w') as password_file:
             password_file.write(password + '\n')
-            
+    
+    # adding encrypted password to password_key.json
     with open(passKey, 'r') as pass_key:
         pass_file = json.load(pass_key)
     
