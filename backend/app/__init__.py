@@ -1,6 +1,6 @@
 def perform_attack():
     
-    from app import findmy_password
+    import app.findmy_password as finder
     import app.ssh_script as ssh_script
     import json
     
@@ -9,7 +9,7 @@ def perform_attack():
     print()
     
     # invoking the findmy_password function to retrieve the password
-    findmy_password()
+    finder()
     print("password retrieval complete.\n")
     print("proceeding with SSH brute-force attack...\n")
     print()
