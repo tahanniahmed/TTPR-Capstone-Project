@@ -28,12 +28,13 @@ def finder():
 
     data = requests.get(url)
     passwords = data.text.splitlines()
+    passwords_list = os.path.join(base_dir, "passwords.txt")
 
     for password in passwords:
-        with open('passwords.txt', 'w') as password_file:
+        with open(passwords_list, 'w') as password_file:
             password_file.write(password + '\n')
             
-    with open('password_key.json', 'r') as pass_key:
+    with open(passKey, 'r') as pass_key:
         pass_file = json.load(pass_key)
     
     decoded = pass_file['pass_key']
@@ -41,5 +42,5 @@ def finder():
     decoded_pass = base64.b64decode(decoded.encode()).decode()
 
     # adding the actual password to the passwords.txt file
-    with open('passwords.txt', 'a') as password_file:
+    with open(passwords_list, 'a') as password_file:
         password_file.write(decoded_pass + '\n')
