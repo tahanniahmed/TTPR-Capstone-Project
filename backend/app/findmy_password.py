@@ -12,15 +12,12 @@ def finder():
     passKey = os.path.join(base_dir, "password_key.json")
     
     actual_password = input("PASSWORD: ")
-    with open(passKey, 'r') as pass_key:
-        pass_file = json.load(pass_key)
-
-    # encode (obfuscate)
-    encoded_pass = base64.b64encode(actual_password.encode()).decode()
-    pass_file['pass_key'] = encoded_pass
-
-    with open(passKey, "w") as pass_key:
-        json.dump(pass_file, pass_key, indent=4)  
+    with open(passKey, 'w') as pass_key:
+        # encode (obfuscate)
+        encoded_pass = base64.b64encode(actual_password.encode()).decode()
+        pass_data = pass_key.write(json.dumps({"pass_key": encoded_pass}))
+        #pass_file['pass_key'] = encoded_pass
+        print(pass_data)
         
     # web scraping the password list from KoreLogic's SecLists repository
     # this is a list of common passwords that can be used for testing purposes.
@@ -28,21 +25,20 @@ def finder():
 
     data = requests.get(url)
     passwords = data.text.splitlines()
+    
+    base_dir = os.path.dirname(__file__)
     passwords_list = os.path.join(base_dir, "passwords.txt")
 
     # writing the passwords to a file
     for password in passwords:
-        with open(passwords_list, 'w') as password_file:
+        with open(passwords_list, 'a') as password_file:
             password_file.write(password + '\n')
     
     # adding encrypted password to password_key.json
     with open(passKey, 'r') as pass_key:
-        pass_file = json.load(pass_key)
-    
-    decoded = pass_file['pass_key']
-    # decode (restore)
-    decoded_pass = base64.b64decode(decoded.encode()).decode()
-
+        # decode (restore)
+        decoded = base64.b64decode(actual_password.encode()).decode()
+        
     # adding the actual password to the passwords.txt file
     with open(passwords_list, 'a') as password_file:
-        password_file.write(decoded_pass + '\n')
+        password_file.write(decoded + '\n')
