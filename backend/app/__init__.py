@@ -47,19 +47,19 @@ def perform_attack():
     # updating file
     with open(targetIP, "w") as ipAddress_key:
         json.dump(target_ip, ipAddress_key, indent=4)
-        print(target_ip["target_ip"])
     
     # updating file
     with open(targetUser, "w") as username_key:
         json.dump(target_user, username_key, indent=4)
-        print(target_user["username"])
         
     # file directory
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
     password_File = os.path.join(base_dir, 'passwords.txt')
     
     TARGETIP = str(target_ip[verify_ip]).strip()
+    print(TARGETIP)
     TARGETUSER = str(target_user[verify_user]).strip()
+    print(TARGETUSER)
     password_document = password_File
     
     ssh_script.ssh_brute_force(TARGETIP, TARGETUSER, password_document)
