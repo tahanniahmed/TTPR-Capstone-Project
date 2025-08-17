@@ -2,22 +2,18 @@ import paramiko
 import time
 import sys
 import socket
-import os
 
 def ssh_brute_force(target_ip, username, password_file):
     timeout = 200
-    # file directory
-    base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
-    password_File = os.path.join(base_dir, password_file)
     
     print(f"[*] Starting SSH brute-force on {target_ip}...")
     print()
     
     try:
-        with open (password_File, "r") as file:
+        with open (password_file, "r") as file:
             passwords = file.read().splitlines()
     except FileNotFoundError:
-        print(f"[!] File '{password_File}' not found")
+        print(f"[!] File '{password_file}' not found")
         sys.exit (1)
     
     tally = 0
@@ -37,4 +33,4 @@ def ssh_brute_force(target_ip, username, password_file):
             time.sleep (2)
         finally:
             ssh. close ()
-            print("[*] Finished. No valid password found.")
+    print("[*] Finished. No valid password found.")

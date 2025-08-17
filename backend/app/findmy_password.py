@@ -20,7 +20,7 @@ def finder():
         
     # web scraping the password list from KoreLogic's SecLists repository
     # this is a list of common passwords that can be used for testing purposes.
-    url = 'https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Passwords/Common-Credentials/500-worst-passwords.txt'
+    url = 'https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Passwords/Common-Credentials/worst-passwords-2017-top100-slashdata.txt'
 
     data = requests.get(url)
     passwords = data.text.splitlines()
