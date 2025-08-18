@@ -20,7 +20,7 @@ def finder():
     # writing the passwords to a file
     for password in passwords:
         with open(passwords_list, 'a') as password_file:
-            password_file.write(password)
+            password_file.write(password + '\n')
     
      # file directory
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
