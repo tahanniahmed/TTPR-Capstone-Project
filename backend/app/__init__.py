@@ -26,9 +26,9 @@ def perform_attack():
 
     verify_ip = "target_ip"
     if verify_ip in target_ip and target_ip[verify_ip] == "":
-        target_address = input("No target IP found. Please enter the target IP address:  \n")
+        target_address = input("no target IP found. please enter the target IP:  \n")
         target_ip[verify_ip] = str(target_address).strip()
-        print("ip address file has been updated")
+        print("ip address file has been updated \n")
         
     # file directory
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
@@ -40,9 +40,9 @@ def perform_attack():
 
     verify_user = "username"
     if verify_user in target_user and target_user[verify_user] == "":
-        target_userName = input("No username found. Please enter target username: \n")
+        target_userName = input("no username found. please enter target username: \n")
         target_user[verify_user] = target_userName.strip()
-        print("username file has been updated")
+        print("username file has been updated \n")
     
     # updating file
     with open(targetIP, "w") as ipAddress_key:

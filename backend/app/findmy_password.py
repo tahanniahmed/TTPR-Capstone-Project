@@ -26,20 +26,12 @@ def finder():
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
     passKey = os.path.join(base_dir, "password_key.json")
     
-    actual_password = input("PASSWORD:\n").strip()
+    actual_password = input("PASSWORD:\n")
     # adding the actual password to the passwords.txt file
     with open(passwords_list, 'a') as password_file:
-        password_file.write(actual_password)
+        password_file.write(f'{actual_password}\n')
     
     with open(passKey, 'w') as pass_key:
         # encode (obfuscate)
         actual_password = base64.b64encode(actual_password.encode()).decode()
         pass_data = pass_key.write(json.dumps({"pass_key": actual_password}))
-        #pass_file['pass_key'] = encoded_pass
-        
-    # adding encrypted password to password_key.json
-   # with open(passKey, 'r') as pass_key:
-        # decode (restore)
-    #    decoded = base64.b64decode(actual_password.encode()).decode().strip()
-    # adding the actual password to the passwords.txt file
-    
