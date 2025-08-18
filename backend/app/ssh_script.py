@@ -18,6 +18,7 @@ def ssh_brute_force(target_ip, username, password_file):
     
     tally = 0
     for password in passwords:
+        password = password.strip()
         tally += 1
         try:
             ssh = paramiko.SSHClient()
